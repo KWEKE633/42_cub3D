@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:37 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/14 19:09:53 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/15 16:15:03 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
+# include <math.h>
 # include "./gnl/get_next_line.h"
 # include "./libft/libft.h"
 # include "./minilibx-linux/mlx.h"
@@ -25,6 +26,7 @@
 
 # define WIDTH 800
 # define HEIGHT 600
+# define MOVE_SPEED 0.4
 
 typedef struct s_color
 {
@@ -40,6 +42,7 @@ typedef struct s_img
 	int     bits_per_pixel;
 	int     line_length;
 	int     endian;
+	int		bpp;
 }   t_img;
 
 typedef struct s_texture
@@ -89,15 +92,15 @@ typedef struct s_start
 {
 	int		fd;
 	int		heightmap;
-	int		widthmap;
+	int		*widthmap;
 	int		playercount;
 	int		x_axis;
 	int		y_axis;
 	int		counter;
 	char	**map;
-	// void	*floor;
+	void	*floors;
 	void	*barrier;
-	// void	*player;
+	void	*players;
 	void	*mlxpointer;
 	void	*winpointer;
 	char	*texture_no;
@@ -131,5 +134,15 @@ int	parse_cubfile(t_complete *game, char *filename);
 int	map_reading(t_complete *game, char *line);
 int	set_color(t_color *target, const char *line);
 int	ft_strcmp(const char *s1, const char *s2);
+void	set_player_dir(t_player *player, char dir);
+int	move_forward(t_complete *game);
+int	move_backward(t_complete *game);
+int	move_left(t_complete *game);
+int	move_right(t_complete *game);
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	load_textures(t_complete *game);
+void	render_frame(t_complete *game);
+// void	raycast(t_complete *game);
 
 #endif

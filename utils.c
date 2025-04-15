@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:18:21 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/14 16:06:15 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/15 11:34:00 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	check_errors(t_complete *game)
 {
-	if_walls(game);
 	character_valid(game);
 }
 
@@ -36,6 +35,8 @@ int	exit_point(t_complete *game)
 	free(game->mlxpointer);
 	while (line < game->heightmap)
 		free(game->map[line++]);
+	while (line < game->heightmap)
+		free(game->widthmap);
 	free(game->map);
 	exit(0);
 }

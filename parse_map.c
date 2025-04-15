@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:21:14 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/14 19:07:16 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/15 10:44:26 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,12 @@ static int	add_line(t_complete *game, char *line)
 	return (1);
 }
 
-// int	map_reading(t_complete *game, char *argv)
-// {
-// 	char	*read_map;
-
-// 	game->fd = open(argv, O_RDONLY);
-// 	if (game->fd < 0)
-// 		return (0);
-// 	while (1)
-// 	{
-// 		read_map = get_next_line(game->fd);
-// 		if (!read_map)
-// 			break ;
-// 		if (!add_line(game, read_map))
-// 		{
-// 			free(read_map);
-// 			break ;
-// 		}
-// 	}
-// 	close (game->fd);
-// 	game->widthmap = width_of_map(game->map[0]);
-// 	return (1);
-// }
-
 int	map_reading(t_complete *game, char *line)
 {
+	int	i;
+	int j;
+
+	j = 1;
 	while (1)
 	{
 		if (!add_line(game, line))
@@ -87,8 +68,15 @@ int	map_reading(t_complete *game, char *line)
 		line = get_next_line(game->fd);
 		if (!line)
 			break ;
+		j++;
 	}
 	close (game->fd);
-	game->widthmap = width_of_map(game->map[0]);
+	i = 0;
+	game->widthmap =  (int *)malloc(sizeof(int) * (j + 1));
+	while (game->map[i])
+	{
+		game->widthmap[i] = width_of_map(game->map[i]);
+		i++;
+	}
 	return (1);
 }

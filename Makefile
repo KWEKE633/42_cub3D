@@ -6,7 +6,7 @@
 #    By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 14:12:45 by enkwak            #+#    #+#              #
-#    Updated: 2025/04/14 16:42:05 by enkwak           ###   ########.fr        #
+#    Updated: 2025/04/15 15:19:24 by enkwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ INCLUDES = -I./ -I./gnl -I./libft -I./minilibx -I./printf
 
 SRCS = main.c \
 	   parse.c parse_identifier.c parse_map.c validate_map.c utils.c \
-	   event.c errors.c colors.c
+	   event.c errors.c colors.c player.c player_move.c render_frame.c raycast.c init_textures.c \
+	   
 
 GNL_SRCS = ./gnl/get_next_line.c ./gnl/get_next_line_utils.c
 
