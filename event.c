@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:15:42 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/17 05:45:42 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/17 07:01:02 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int	controls_working(int command, t_complete *game)
 		move_left(game);
 	if (command == 100)
 		move_right(game);
+	if (command == 65361)
+		rotate_left(game);
+	if (command == 65363)
+		rotate_right(game);
 	// if (works)
 	// 	render_frame(game);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:37 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/17 04:21:31 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/17 07:07:05 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define WIDTH 800
 # define HEIGHT 600
 # define MOVE_SPEED 0.4
+# define ROTATE_SPEED 0.2
 
 typedef struct s_color
 {
@@ -150,5 +151,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int	init_textures(t_complete *game);
 int	render_frame(t_complete *game);
 void	raycast(t_complete *game);
+int	rotate_left(t_complete *game);
+int	rotate_right(t_complete *game);
 
 #endif
