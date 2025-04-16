@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:18:21 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/15 11:34:00 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/17 06:04:23 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ int	exit_point(t_complete *game)
 	int	line;
 
 	line = 0;
-	// if (game->player)
-	// 	mlx_destroy_image(game->mlxpointer, game->player);
-	// if (game->floor)
-	// 	mlx_destroy_image(game->mlxpointer, game->floor);
-	if (game->barrier)
-		mlx_destroy_image(game->mlxpointer, game->barrier);
+	// if (game->noth)
+	// 	mlx_destroy_image(game->mlxpointer, game->noth);
+	// if (game->soth)
+	// 	mlx_destroy_image(game->mlxpointer, game->soth);
+	// if (game->west)
+	// 	mlx_destroy_image(game->mlxpointer, game->west);
+	// if (game->east)
+	// 	mlx_destroy_image(game->mlxpointer, game->east);
 	if (game->winpointer)
 		mlx_destroy_window(game->mlxpointer, game->winpointer);
 	if (game->mlxpointer)
@@ -49,8 +51,9 @@ int	close_window(t_complete *game)
 
 int	count_strs(char **strs)
 {
-	int	count = 0;
+	int	count;
 
+	count = 0;
 	while (strs && strs[count])
 		count++;
 	return (count);
@@ -58,8 +61,9 @@ int	count_strs(char **strs)
 
 void	free_strs(char **strs)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	if (!strs)
 		return ;
 	while (strs[i])

@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:03:01 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/15 14:24:28 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/17 04:33:07 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,14 @@ char	**deep_copy_map(char **src, int height)
 	if (!copy)
 		return (NULL);
 	for (int i = 0; i < height; i++)
+	{	
 		copy[i] = ft_strdup(src[i]);
+		if (!copy[i])
+		{
+			free_strs(copy);
+			return (NULL);
+		}
+	}
 	copy[height] = NULL;
 	return (copy);
 }
@@ -137,7 +144,7 @@ void	character_valid(t_complete *game)
 	}
 	get_player_pos(game, &player_x, &player_y);
 	map_copy = deep_copy_map(game->map, game->heightmap);
-	if (!flood_fill(map_copy, player_y, player_x, game->heightmap,
+	if (!map_copy || !flood_fill(map_copy, player_y, player_x, game->heightmap,
 			game->widthmap) || !map_all_wall(map_copy, game->heightmap))
 	{
 		ft_printf("\nError\nMap is not closed properly!\n");

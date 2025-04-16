@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:37 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/15 16:15:03 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/17 04:21:31 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,12 @@ typedef struct s_start
 	char	*we_tex;
 	char	*ea_tex;
 	t_player	player;
-	t_texture	textures[4];
+	t_texture	*noth;
+	t_texture	*soth;
+	t_texture	*west;
+	t_texture	*east;
+	// t_texture	*floor_tex;
+	// t_texture	*ceiling_tex;
 	t_img		img;
 	t_color	floor;
 	t_color	ceiling;
@@ -141,8 +146,9 @@ int	move_left(t_complete *game);
 int	move_right(t_complete *game);
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	load_textures(t_complete *game);
-void	render_frame(t_complete *game);
-// void	raycast(t_complete *game);
+// void	load_textures(t_complete *game);
+int	init_textures(t_complete *game);
+int	render_frame(t_complete *game);
+void	raycast(t_complete *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:10:04 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/15 16:15:09 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/17 04:21:12 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ void	clear_image(t_complete *game)
 			&game->img.line_length, &game->img.endian);
 }
 
-void	render_frame(t_complete *game)
+int	render_frame(t_complete *game)
 {
 	clear_image(game);
-	// raycast(game);
 	draw_floor_ceiling(game);
+	raycast(game);
+	// draw_floor_ceiling(game);
 	mlx_put_image_to_window(game->mlxpointer, game->winpointer, game->img.img,
 		0, 0);
+	return (0);
 }

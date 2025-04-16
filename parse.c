@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:38:13 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/15 11:33:08 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/17 04:29:03 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	set_texture(char **target, char *line)
 	while (*line && *line == ' ')
 		line++;
 	*target = ft_strdup(line);
+	if (!*target)
+		free_strs(target);
 }
 
 static void	handle_identifier(t_complete *conf, char *line)
