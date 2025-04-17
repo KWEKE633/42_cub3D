@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:38:13 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/17 04:29:03 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 06:52:11 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,28 @@ static int	is_empty_line(const char *line)
 	return (1);
 }
 
-static void	set_texture(char **target, char *line)
+static void	set_texture(char **target, char *line, t_complete *conf)
 {
 	while (*line && *line == ' ')
 		line++;
 	*target = ft_strdup(line);
-	if (!*target)
+	if (!*target || !target)
+	{
 		free_strs(target);
+		exit_point(conf);
+	}
 }
 
 static void	handle_identifier(t_complete *conf, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
-		set_texture(&conf->no_tex, line + 3);
+		set_texture(&conf->no_tex, line + 3, conf);
 	else if (ft_strncmp(line, "SO ", 3) == 0)
-		set_texture(&conf->so_tex, line + 3);
+		set_texture(&conf->so_tex, line + 3, conf);
 	else if (ft_strncmp(line, "WE ", 3) == 0)
-		set_texture(&conf->we_tex, line + 3);
+		set_texture(&conf->we_tex, line + 3, conf);
 	else if (ft_strncmp(line, "EA ", 3) == 0)
-		set_texture(&conf->ea_tex, line + 3);
+		set_texture(&conf->ea_tex, line + 3, conf);
 	else if (ft_strncmp(line, "F ", 2) == 0)
 		set_color(&conf->floor, line + 2);
 	else if (ft_strncmp(line, "C ", 2) == 0)

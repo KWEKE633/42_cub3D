@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:02:24 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/14 19:36:05 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 07:47:23 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	set_color(t_color *target, const char *line)
 		line++;
 	rgb = ft_split(line, ',');
 	if (!rgb || count_strs(rgb) != 3)
-		return (ft_printf("Error\nRGB形式が不正です: %s\n", line), 1);
+		return (ft_printf("Error\nRGB is invalid: %s\n", line), 1);
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);

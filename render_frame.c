@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:10:04 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/17 04:21:12 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 07:56:15 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	draw_floor_ceiling(t_complete *game)
 {
 	int	color;
+	int	x;
+	int	y;
 
-	int x, y;
-	// 天井描画（上半分）
 	color = (game->ceiling.r << 16) | (game->ceiling.g << 8) | game->ceiling.b;
 	y = 0;
 	while (y < HEIGHT / 2)
@@ -30,7 +30,6 @@ void	draw_floor_ceiling(t_complete *game)
 		}
 		y++;
 	}
-	// 床描画（下半分）
 	color = (game->floor.r << 16) | (game->floor.g << 8) | game->floor.b;
 	while (y < HEIGHT)
 	{
@@ -58,7 +57,6 @@ int	render_frame(t_complete *game)
 	clear_image(game);
 	draw_floor_ceiling(game);
 	raycast(game);
-	// draw_floor_ceiling(game);
 	mlx_put_image_to_window(game->mlxpointer, game->winpointer, game->img.img,
 		0, 0);
 	return (0);

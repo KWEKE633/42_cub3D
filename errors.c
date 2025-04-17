@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:03:01 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/17 04:33:07 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 07:51:06 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,6 @@ static void	count_checker(t_complete *game, int height, int width)
 		ft_printf("Error\nHere!%c\n", game->map[height][width]);
 		exit_point(game);
 	}
-	// if (game->map[height][width] == 'N')
-	// 	game->playercount++;
-	// if (game->map[height][width] == 'S')
-	// 	game->playercount++;
-	// if (game->map[height][width] == 'E')
-	// 	game->playercount++;
-	// if (game->map[height][width] == 'W')
-	// 	game->playercount++;
 	if (ft_strchr("NSEW", game->map[height][width]))
 	{
 		game->player.x = width + 0.5;

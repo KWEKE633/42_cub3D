@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:26 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/17 05:45:19 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 07:55:43 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,11 @@ int	main_sub(t_complete *game)
 		ft_printf("Error\nFailed to create a new window.\n");
 		return (1);
 	}
-	// load_textures(game);
 	if (init_textures(game))
 		exit_point(game);
-	// render_frame(game);
+	render_frame(game);
 	mlx_key_hook(game->winpointer, controls_working, game);
 	mlx_hook(game->winpointer, 17, 0, close_window, game);
-	mlx_loop_hook(game->mlxpointer, render_frame, game);
 	mlx_loop(game->mlxpointer);
 	return (0);
 }

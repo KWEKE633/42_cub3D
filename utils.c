@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:18:21 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/17 06:04:23 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 07:33:42 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,30 @@ int	exit_point(t_complete *game)
 	int	line;
 
 	line = 0;
-	// if (game->noth)
-	// 	mlx_destroy_image(game->mlxpointer, game->noth);
-	// if (game->soth)
-	// 	mlx_destroy_image(game->mlxpointer, game->soth);
-	// if (game->west)
-	// 	mlx_destroy_image(game->mlxpointer, game->west);
-	// if (game->east)
-	// 	mlx_destroy_image(game->mlxpointer, game->east);
+	if (game->noth->img)
+		mlx_destroy_image(game->mlxpointer, game->noth->img);
+	if (game->soth->img)
+		mlx_destroy_image(game->mlxpointer, game->soth->img);
+	if (game->west->img)
+		mlx_destroy_image(game->mlxpointer, game->west->img);
+	if (game->east->img)
+		mlx_destroy_image(game->mlxpointer, game->east->img);
+	if (game->no_tex)
+		free(game->no_tex);
+	if (game->so_tex)
+		free(game->so_tex);
+	if (game->ea_tex)
+		free(game->ea_tex);
+	if (game->we_tex)
+		free(game->we_tex);
+	if (game->noth)
+		free(game->noth);
+	if (game->soth)
+		free(game->soth);
+	if (game->ea_tex)
+		free(game->east);
+	if (game->we_tex)
+		free(game->west);
 	if (game->winpointer)
 		mlx_destroy_window(game->mlxpointer, game->winpointer);
 	if (game->mlxpointer)

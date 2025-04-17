@@ -6,29 +6,11 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:28:45 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/17 01:51:48 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 07:49:31 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-// int get_pixel_color(t_texture *texture, int x, int y)
-// {
-//     int *pixel;
-
-//     pixel = (int *)(texture->addr + (y * texture->line_length + x
-// * (texture->bpp / 8)));
-//     return (*pixel);
-// }
-
-// int	get_pixel_color(t_texture *texture, int x, int y)
-// {
-// 	int	*pixel;
-
-// 	pixel = (int *)(texture->addr + (y * texture->line_length + x
-// 				* (texture->bits_per_pixel / 8)));
-// 	return (*pixel);
-// }
 
 int	get_pixel_color(t_texture *texture, int x, int y)
 {
@@ -36,7 +18,7 @@ int	get_pixel_color(t_texture *texture, int x, int y)
 	int		color;
 
 	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
-		return (0); // 範囲外なら黒など適当な色
+		return (0);
 	pixel = texture->addr + (y * texture->line_length + x
 			* (texture->bits_per_pixel / 8));
 	color = *(unsigned int *)pixel;

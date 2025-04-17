@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:22:55 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/14 17:12:44 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 07:05:33 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,9 @@ int	parse_identifier(t_complete *game, char *line)
 	if (!tokens || count_strs(tokens) < 2 || !tokens[1])
 		return (free_strs(tokens), ft_printf("Error\nIdentifier 行が不正: %s\n",
 				line), 1);
-	if (ft_strcmp(tokens[0], "NO") == 0)
-		game->texture_no = ft_strdup(tokens[1]);
-	else if (ft_strcmp(tokens[0], "SO") == 0)
-		game->texture_so = ft_strdup(tokens[1]);
-	else if (ft_strcmp(tokens[0], "WE") == 0)
-		game->texture_we = ft_strdup(tokens[1]);
-	else if (ft_strcmp(tokens[0], "EA") == 0)
-		game->texture_ea = ft_strdup(tokens[1]);
+	if (ft_strcmp(tokens[0], "NO") == 0 || ft_strcmp(tokens[0], "SO") == 0
+		|| ft_strcmp(tokens[0], "WE") == 0 || ft_strcmp(tokens[0], "EA") == 0)
+		return (free_strs(tokens), 0);
 	else if (ft_strcmp(tokens[0], "F") == 0)
 	{
 		if (!tokens[1])
