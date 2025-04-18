@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:37 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/18 07:55:00 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 12:48:21 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # define WIDTH 800
 # define HEIGHT 600
 # define MOVE_SPEED 0.4
-# define ROTATE_SPEED 0.2
+# define ROTATE_SPEED 0.25
+# define TILE_SIZE 10
 
 typedef struct s_color
 {
@@ -150,5 +151,8 @@ int				render_frame(t_complete *game);
 void			raycast(t_complete *game);
 int				rotate_left(t_complete *game);
 int				rotate_right(t_complete *game);
+
+void			draw_minimap(t_complete *game);
+void			draw_minimap_player(t_complete *game);
 
 #endif

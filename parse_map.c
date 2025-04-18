@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:21:14 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/18 07:38:36 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 11:25:26 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ int	map_reading(t_complete *game, char *line)
 	}
 	if (!game->widthmap)
 		free(game->widthmap);
+	game->widthmap[i] = 0;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:09:25 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/18 07:50:46 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/18 11:15:51 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	init_textures(t_complete *game)
 	game->soth = load_texture(game->mlxpointer, "textures/so.xpm");
 	game->west = load_texture(game->mlxpointer, "textures/we.xpm");
 	game->east = load_texture(game->mlxpointer, "textures/ea.xpm");
-	// game->floor_tex = load_texture(game->mlxpointer, "textures/floor.xpm");
-	// game->ceiling_tex = load_texture(game->mlxpointer, "textures/ceiling.xpm");
 	if (!game->noth || !game->soth || !game->west || !game->east)
 	{
 		printf("Error: Failed to load textures\n");
