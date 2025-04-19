@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:18:21 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/18 13:40:17 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/19 16:57:15 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,38 @@ int	exit_point(t_complete *game)
 	int	line;
 
 	line = 0;
-	// if (!game)
-	// 	exit(1);
-	if (game->noth->img)
-		mlx_destroy_image(game->mlxpointer, game->noth->img);
-	if (game->soth->img)
-		mlx_destroy_image(game->mlxpointer, game->soth->img);
-	if (game->west->img)
-		mlx_destroy_image(game->mlxpointer, game->west->img);
-	if (game->east->img)
-		mlx_destroy_image(game->mlxpointer, game->east->img);
-	if (game->no_tex)
-		free(game->no_tex);
-	if (game->so_tex)
-		free(game->so_tex);
-	if (game->ea_tex)
-		free(game->ea_tex);
-	if (game->we_tex)
-		free(game->we_tex);
-	if (game->noth)
-		free(game->noth);
-	if (game->soth)
-		free(game->soth);
-	if (game->ea_tex)
-		free(game->east);
-	if (game->we_tex)
-		free(game->west);
-	if (game->winpointer)
-		mlx_destroy_window(game->mlxpointer, game->winpointer);
+	if (!game)
+		exit(1);
 	if (game->mlxpointer)
+	{
+		if (game->noth && game->noth->img)
+			mlx_destroy_image(game->mlxpointer, game->noth->img);
+		if (game->soth && game->soth->img)
+			mlx_destroy_image(game->mlxpointer, game->soth->img);
+		if (game->west && game->west->img)
+			mlx_destroy_image(game->mlxpointer, game->west->img);
+		if (game->east && game->east->img)
+			mlx_destroy_image(game->mlxpointer, game->east->img);
+		if (game->winpointer)
+			mlx_destroy_window(game->mlxpointer, game->winpointer);
 		mlx_destroy_display(game->mlxpointer);
-	free(game->mlxpointer);
-	if (game->widthmap)
-		free(game->widthmap);
-	while (game->map[line] && line < game->heightmap)
-		free(game->map[line++]);
-	free(game->map);
+		free(game->mlxpointer);
+	}
+	free(game->no_tex);
+	free(game->so_tex);
+	free(game->ea_tex);
+	free(game->we_tex);
+	free(game->noth);
+	free(game->soth);
+	free(game->west);
+	free(game->east);
+	free(game->widthmap);
+	if (game->map)
+	{
+		while (game->map[line])
+			free(game->map[line++]);
+		free(game->map);
+	}
 	exit(0);
 }
 
@@ -87,7 +83,9 @@ void	free_strs(char **strs)
 	while (strs[i])
 	{
 		free(strs[i]);
+		strs[i] = NULL;
 		i++;
 	}
 	free(strs);
+	strs = NULL;
 }

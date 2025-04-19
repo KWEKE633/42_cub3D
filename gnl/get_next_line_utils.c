@@ -6,13 +6,13 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:00:26 by enkwak            #+#    #+#             */
-/*   Updated: 2024/11/14 16:49:23 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/19 16:34:30 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *str, int n)
+char	*ft_strchr_gnl(const char *str, int n)
 {
 	char	*tmp;
 
@@ -26,7 +26,7 @@ char	*ft_strchr(const char *str, int n)
 	return ((char *)tmp);
 }
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen_gnl(const char *str)
 {
 	size_t	length;
 
@@ -36,13 +36,13 @@ size_t	ft_strlen(const char *str)
 	return (length);
 }
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup_gnl(const char *str)
 {
 	size_t	i;
 	size_t	len;
 	char	*s;
 
-	len = ft_strlen(str) + 1;
+	len = ft_strlen_gnl(str) + 1;
 	s = (char *)malloc(sizeof(char) * len);
 	if (s == NULL)
 		return (NULL);
@@ -52,7 +52,7 @@ char	*ft_strdup(const char *str)
 	return (s);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	size_t	srclen;
@@ -60,9 +60,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	srclen = ft_strlen(s);
+	srclen = ft_strlen_gnl(s);
 	if (start > srclen)
-		return (ft_strdup(""));
+		return (ft_strdup_gnl(""));
 	if (start + len > srclen)
 		len = srclen - start;
 	str = (char *)malloc(sizeof(char) * len + 1);
@@ -78,7 +78,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_gnl(char const *s1, char const *s2)
 {
 	char	*str;
 	int		i;
@@ -87,7 +87,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	size = ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1;
 	str = (char *)malloc(sizeof(char) * size);
 	if (!str)
 		return (NULL);

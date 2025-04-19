@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:26 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/18 07:55:43 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/19 15:14:59 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	main_sub(t_complete *game)
 {
 	if (!game->mlxpointer)
 	{
-		exit_point(game);
 		ft_printf("Error\nFailed to initialize MLX.\n");
+		exit_point(game);
 		return (1);
 	}
 	game->winpointer = mlx_new_window(game->mlxpointer, WIDTH, HEIGHT, "cub3D");
@@ -54,8 +54,8 @@ int	main_sub(t_complete *game)
 			mlx_destroy_display(game->mlxpointer);
 			free(game->mlxpointer);
 		}
-		exit_point(game);
 		ft_printf("Error\nFailed to create a new window.\n");
+		exit_point(game);
 		return (1);
 	}
 	if (init_textures(game))
@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 	if (parse_cubfile(&game, argv[1]))
 	{
 		ft_printf("Error\nFailed to read the map.\n");
-		return (1);
+		exit_point(&game);
 	}
 	check_errors(&game);
 	game.mlxpointer = mlx_init();
