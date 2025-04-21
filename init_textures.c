@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:09:25 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/18 11:15:51 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/21 08:34:44 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static t_texture	*load_texture(void *mlx, char *path)
 
 int	init_textures(t_complete *game)
 {
-	game->noth = load_texture(game->mlxpointer, "textures/no.xpm");
-	game->soth = load_texture(game->mlxpointer, "textures/so.xpm");
-	game->west = load_texture(game->mlxpointer, "textures/we.xpm");
-	game->east = load_texture(game->mlxpointer, "textures/ea.xpm");
+	game->noth = load_texture(game->mlxpointer, game->no_tex);
+	game->soth = load_texture(game->mlxpointer, game->so_tex);
+	game->west = load_texture(game->mlxpointer, game->we_tex);
+	game->east = load_texture(game->mlxpointer, game->ea_tex);
 	if (!game->noth || !game->soth || !game->west || !game->east)
 	{
 		printf("Error: Failed to load textures\n");

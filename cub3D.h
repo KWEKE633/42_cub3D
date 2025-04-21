@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:37 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/19 20:19:05 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/21 10:02:08 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
+
+# define FOV_DEG 60.0
+# define FOV_RAD (FOV_DEG * M_PI / 180.0)
 
 typedef struct s_color
 {

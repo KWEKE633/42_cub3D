@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:26 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/19 15:14:59 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/21 08:10:45 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	main_sub(t_complete *game)
 		exit_point(game);
 		return (1);
 	}
+	if (init_textures(game))
+		exit_point(game);
 	game->winpointer = mlx_new_window(game->mlxpointer, WIDTH, HEIGHT, "cub3D");
 	if (!game->winpointer)
 	{
@@ -58,8 +60,6 @@ int	main_sub(t_complete *game)
 		exit_point(game);
 		return (1);
 	}
-	if (init_textures(game))
-		exit_point(game);
 	render_frame(game);
 	mlx_key_hook(game->winpointer, controls_working, game);
 	mlx_hook(game->winpointer, 17, 0, close_window, game);
