@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:02:24 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/19 14:11:53 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/21 12:20:34 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ static int	is_valid_rgb(int r, int g, int b)
 int	set_color(t_color *target, const char *line)
 {
 	char	**rgb;
+	int		r;
+	int		g;
+	int		b;
 
-	int r, g, b;
 	while (*line == ' ')
 		line++;
 	rgb = ft_split(line, ',');

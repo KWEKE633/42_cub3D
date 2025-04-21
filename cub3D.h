@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:37 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/21 10:02:08 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/21 12:39:35 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 # define WIDTH 1800
 # define HEIGHT 1600
-# define MOVE_SPEED 0.4
+# define MOVE_SPEED 0.2
 # define ROTATE_SPEED 0.25
 # define TILE_SIZE 10
-# define COLLISION_MARGIN 0.7
+# define COLLISION_MARGIN 0.4
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -126,8 +126,6 @@ typedef struct s_start
 	t_texture	*soth;
 	t_texture	*west;
 	t_texture	*east;
-	// t_texture	*floor_tex;
-	// t_texture	*ceiling_tex;
 	t_img		img;
 	t_color		floor;
 	t_color		ceiling;

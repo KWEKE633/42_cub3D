@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:21:14 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/19 16:50:14 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/21 12:11:15 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	add_line(t_complete *game, char *line)
 int	map_reading(t_complete *game, char *line)
 {
 	int	i;
-	int j;
+	int	j;
 
 	j = 1;
 	while (1)
@@ -70,9 +70,9 @@ int	map_reading(t_complete *game, char *line)
 			break ;
 		j++;
 	}
-	close (game->fd);
+	close(game->fd);
 	i = 0;
-	game->widthmap =  (int *)malloc(sizeof(int) * (j + 1));
+	game->widthmap = (int *)malloc(sizeof(int) * (j + 1));
 	while (game->map[i])
 	{
 		game->widthmap[i] = width_of_map(game->map[i]);

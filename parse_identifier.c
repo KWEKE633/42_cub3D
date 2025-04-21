@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:22:55 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/19 14:43:34 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/21 12:18:32 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_atoi_cub(char *str)
 	i = 0;
 	number = 0;
 	if ((9 <= str[i] && str[i] <= 13) || str[i] == ' ')
-		return(-1);
+		return (-1);
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
@@ -45,8 +45,10 @@ static int	parse_rgb(char *str)
 {
 	char	**split;
 	int		color;
+	int		r;
+	int		g;
+	int		b;
 
-	int r, g, b;
 	split = ft_split(str, ',');
 	if (!split || count_strs(split) != 3)
 		return (free_strs(split), -1);

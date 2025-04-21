@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:38:13 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/21 08:43:33 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/21 12:10:37 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	set_texture(char **target, char *line, t_complete *conf)
 {
 	char	*end;
 
-	
 	while (*line && *line == ' ')
 		line++;
 	end = line + ft_strlen(line) - 1;
