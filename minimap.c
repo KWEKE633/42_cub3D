@@ -6,123 +6,141 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 10:22:22 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/18 11:58:17 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/22 13:04:59 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	draw_minimap(t_complete *game)
+void	draw_minimap(t_complete *game, t_mini min)
 {
-	int	x;
-	int	y;
-	int	screen_x;
-	int	screen_y;
-	int	color;
-	int	dx;
-	int	dy;
-
-	y = 0;
-	while (game->map[y])
+	while (game->map[min.y++])
 	{
-		x = 0;
-		while (game->map[y][x])
+		min.x = 0;
+		while (game->map[min.y -1][min.x])
 		{
-			screen_x = x * TILE_SIZE;
-			screen_y = y * TILE_SIZE;
-			if (game->map[y][x] == '1')
-				color = 0x000000;
-			else
-				color = 0xFFD700;
-			dy = 0;
-			while (dy < TILE_SIZE)
+			min.screen_x = min.x * TILE_SIZE;
+			min.screen_y = (min.y - 1) * TILE_SIZE;
+			min.color = 0xFFD700;
+			if (game->map[min.y - 1][min.x] == '1')
+				min.color = 0x000000;
+			min.dy = 0;
+			while (min.dy < TILE_SIZE)
 			{
-				dx = 0;
-				while (dx < TILE_SIZE)
+				min.dx = 0;
+				while (min.dx < TILE_SIZE)
 				{
-					my_mlx_pixel_put(&game->img, screen_x + dx, screen_y + dy,
-						color);
-					dx++;
+					my_mlx_pixel_put(&game->img, min.screen_x + min.dx,
+						min.screen_y + min.dy, min.color);
+					min.dx++;
 				}
-				dy++;
+				min.dy++;
 			}
-			x++;
+			min.x++;
 		}
-		y++;
 	}
 }
 
-void	draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
+void	draw_line1(t_img *img, t_minimap m, int color)
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
-
-	dx = abs(x1 - x0);
-	dy = abs(y1 - y0);
-	if (x0 < x1)
-		sx = 1;
-	else
-		sx = -1;
-	if (y0 < y1)
-		sy = 1;
-	else
-		sy = -1;
-	err = dx - dy;
+	draw_abs1(&m);
+	if (m.p1x < m.p2x)
+		m.sx = 1;
+	if (m.p1y < m.p2y)
+		m.sy = 1;
+	m.err = m.dx - m.dy;
 	while (1)
 	{
-		my_mlx_pixel_put(img, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
+		my_mlx_pixel_put(img, m.p1x, m.p1y, color);
+		if (m.p1x == m.p2x && m.p1y == m.p2y)
 			break ;
-		e2 = 2 * err;
-		if (e2 > -dy)
+		m.e2 = 2 * m.err;
+		if (m.e2 > -m.dy)
 		{
-			err -= dy;
-			x0 += sx;
+			m.err -= m.dy;
+			m.p1x += m.sx;
 		}
-		if (e2 < dx)
+		if (m.e2 < m.dx)
 		{
-			err += dx;
-			y0 += sy;
+			m.err += m.dx;
+			m.p1y += m.sy;
+		}
+	}
+}
+
+void	draw_line2(t_img *img, t_minimap m, int color)
+{
+	draw_abs2(&m);
+	if (m.p1x < m.p3x)
+		m.sx = 1;
+	if (m.p1y < m.p3y)
+		m.sy = 1;
+	m.err = m.dx - m.dy;
+	while (1)
+	{
+		my_mlx_pixel_put(img, m.p1x, m.p1y, color);
+		if (m.p1x == m.p3x && m.p1y == m.p3y)
+			break ;
+		m.e2 = 2 * m.err;
+		if (m.e2 > -m.dy)
+		{
+			m.err -= m.dy;
+			m.p1x += m.sx;
+		}
+		if (m.e2 < m.dx)
+		{
+			m.err += m.dx;
+			m.p1y += m.sy;
+		}
+	}
+}
+
+void	draw_line3(t_img *img, t_minimap m, int color)
+{
+	draw_abs3(&m);
+	if (m.p2x < m.p3x)
+		m.sx = 1;
+	if (m.p2y < m.p3y)
+		m.sy = 1;
+	m.err = m.dx - m.dy;
+	while (1)
+	{
+		my_mlx_pixel_put(img, m.p2x, m.p2y, color);
+		if (m.p2x == m.p3x && m.p2y == m.p3y)
+			break ;
+		m.e2 = 2 * m.err;
+		if (m.e2 > -m.dy)
+		{
+			m.err -= m.dy;
+			m.p2x += m.sx;
+		}
+		if (m.e2 < m.dx)
+		{
+			m.err += m.dx;
+			m.p2y += m.sy;
 		}
 	}
 }
 
 void	draw_minimap_player(t_complete *game)
 {
-	int		px;
-	int		py;
-	double	dir_x;
-	double	dir_y;
-	double	len;
-	double	base;
-	double	norm_x;
-	double	norm_y;
-	int		p1x;
-	int		p1y;
-	int		p2x;
-	int		p2y;
-	int		p3x;
-	int		p3y;
+	t_minimap	mini;
 
-	px = game->player.x * TILE_SIZE;
-	py = game->player.y * TILE_SIZE;
-	dir_x = game->player.dir_x;
-	dir_y = game->player.dir_y;
-	len = 10.0;
-	base = 5.0;
-	p1x = px + (int)(dir_x * len);
-	p1y = py + (int)(dir_y * len);
-	norm_x = -dir_y;
-	norm_y = dir_x;
-	p2x = px + (int)(norm_x * base);
-	p2y = py + (int)(norm_y * base);
-	p3x = px - (int)(norm_x * base);
-	p3y = py - (int)(norm_y * base);
-	draw_line(&game->img, p1x, p1y, p2x, p2y, 0xFF0000);
-	draw_line(&game->img, p1x, p1y, p3x, p3y, 0xFF0000);
-	draw_line(&game->img, p2x, p2y, p3x, p3y, 0xFF0000);
+	mini.px = game->player.x * TILE_SIZE;
+	mini.py = game->player.y * TILE_SIZE;
+	mini.dir_x = game->player.dir_x;
+	mini.dir_y = game->player.dir_y;
+	mini.len = 10.0;
+	mini.base = 5.0;
+	mini.p1x = mini.px + (int)(mini.dir_x * mini.len);
+	mini.p1y = mini.py + (int)(mini.dir_y * mini.len);
+	mini.norm_x = -mini.dir_y;
+	mini.norm_y = mini.dir_x;
+	mini.p2x = mini.px + (int)(mini.norm_x * mini.base);
+	mini.p2y = mini.py + (int)(mini.norm_y * mini.base);
+	mini.p3x = mini.px - (int)(mini.norm_x * mini.base);
+	mini.p3y = mini.py - (int)(mini.norm_y * mini.base);
+	draw_line1(&game->img, mini, 0xFF0000);
+	draw_line2(&game->img, mini, 0xFF0000);
+	draw_line3(&game->img, mini, 0xFF0000);
 }

@@ -6,31 +6,11 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:03:01 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/19 17:34:37 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/22 13:11:30 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-static int	map_all_wall(char **map, int height)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < height)
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == '0' || ft_strchr("NSEW", map[y][x]))
-				return (0);
-			x++;
-		}
-		y++;
-	}
-	return (1);
-}
 
 void	get_player_pos(t_complete *game, int *px, int *py)
 {
@@ -120,39 +100,29 @@ char	**deep_copy_map(char **src, int height)
 
 void	character_valid(t_complete *game)
 {
-	int		height;
-	int		width;
-	int		i;
-	int		player_x;
-	int		player_y;
-	char	**map_copy;
+	t_char	c;
 
-	i = 0;
-	height = 0;
-	while (height < game->heightmap - 1)
+	ft_memset(&c, 0, sizeof(t_char));
+	while (c.height++ < game->heightmap - 1)
 	{
-		width = 0;
-		while (width <= game->widthmap[i])
-		{
-			count_checker(game, height, width);
-			width++;
-		}
-		height++;
-		i++;
+		c.width = 0;
+		while (c.width++ <= game->widthmap[c.i])
+			count_checker(game, c.height - 1, c.width - 1);
+		c.i++;
 	}
 	if (!(game->playercount == 1))
 	{
 		ft_printf("\nError\nplayer is wrong!\n");
 		exit_point(game);
 	}
-	get_player_pos(game, &player_x, &player_y);
-	map_copy = deep_copy_map(game->map, game->heightmap);
-	if (!map_copy || !flood_fill(map_copy, player_y, player_x, game->heightmap)
-		|| !map_all_wall(map_copy, game->heightmap))
+	get_player_pos(game, &c.player_x, &c.player_y);
+	c.map_copy = deep_copy_map(game->map, game->heightmap);
+	if (!c.map_copy || !flood_fill(c.map_copy, c.player_y, c.player_x,
+			game->heightmap) || !map_all_wall(c.map_copy, game->heightmap))
 	{
 		ft_printf("\nError\nMap is not closed properly!\n");
-		free_strs(map_copy);
+		free_strs(c.map_copy);
 		exit_point(game);
 	}
-	free_strs(map_copy);
+	free_strs(c.map_copy);
 }

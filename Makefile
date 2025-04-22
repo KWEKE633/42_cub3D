@@ -6,19 +6,20 @@
 #    By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 14:12:45 by enkwak            #+#    #+#              #
-#    Updated: 2025/04/19 20:25:15 by enkwak           ###   ########.fr        #
+#    Updated: 2025/04/22 13:09:11 by enkwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -O3 -g
 INCLUDES = -I./ -I./gnl -I./libft -I./minilibx -I./printf
 
 SRCS = main.c \
 	   parse.c parse_identifier.c parse_map.c utils.c player_rotate.c minimap.c \
 	   event.c errors.c colors.c player.c player_move.c render_frame.c raycast.c init_textures.c \
+	   minimap_utils.c parse_utils.c raycast_utils.c \
 	   
 
 GNL_SRCS = ./gnl/get_next_line.c ./gnl/get_next_line_utils.c

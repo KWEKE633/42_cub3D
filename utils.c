@@ -6,26 +6,18 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:18:21 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/19 16:57:15 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/22 13:39:40 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	check_errors(t_complete *game)
+void	free_game_resources(t_complete *game)
 {
-	character_valid(game);
-}
-
-int	exit_point(t_complete *game)
-{
-	int	line;
-
-	line = 0;
-	if (!game)
-		exit(1);
 	if (game->mlxpointer)
 	{
+		if (game->img.img)
+			mlx_destroy_image(game->mlxpointer, game->img.img);
 		if (game->noth && game->noth->img)
 			mlx_destroy_image(game->mlxpointer, game->noth->img);
 		if (game->soth && game->soth->img)
@@ -47,9 +39,20 @@ int	exit_point(t_complete *game)
 	free(game->soth);
 	free(game->west);
 	free(game->east);
+}
+
+int	exit_point(t_complete *game)
+{
+	int	line;
+
+	if (!game)
+		exit(1);
+	free_game_resources(game);
 	free(game->widthmap);
+	clear_gnl_buffer(game->fd);
 	if (game->map)
 	{
+		line = 0;
 		while (game->map[line])
 			free(game->map[line++]);
 		free(game->map);

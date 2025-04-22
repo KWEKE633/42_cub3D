@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:26 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/21 08:10:45 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:35:46 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 		ft_printf("Error\nFailed to read the map.\n");
 		exit_point(&game);
 	}
-	check_errors(&game);
+	character_valid(&game);
 	game.mlxpointer = mlx_init();
 	return (main_sub(&game));
 }

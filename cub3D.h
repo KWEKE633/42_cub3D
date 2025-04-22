@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:37 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/21 12:39:35 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/22 13:30:44 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # endif
 
 # define FOV_DEG 60.0
-# define FOV_RAD (FOV_DEG * M_PI / 180.0)
+// # define FOV_RAD (FOV_DEG * M_PI / 180.0)
 
 typedef struct s_color
 {
@@ -44,6 +44,61 @@ typedef struct s_color
 	int			g;
 	int			b;
 }				t_color;
+
+typedef struct s_minimap
+{
+	int			px;
+	int			py;
+	double		dir_x;
+	double		dir_y;
+	double		len;
+	double		base;
+	double		norm_x;
+	double		norm_y;
+	int			p1x;
+	int			p1y;
+	int			p2x;
+	int			p2y;
+	int			p3x;
+	int			p3y;
+	int			dx;
+	int			dy;
+	int			sx;
+	int			sy;
+	int			err;
+	int			e2;
+}				t_minimap;
+
+typedef struct s_mini
+{
+	int			x;
+	int			y;
+	int			screen_x;
+	int			screen_y;
+	int			color;
+	int			dx;
+	int			dy;
+}				t_mini;
+
+typedef struct s_rcast
+{
+	double		step;
+	double		tex_pos;
+	int			y;
+	int			color;
+	int			tex_x;
+	int			tex_y;
+}				t_rcast;
+
+typedef struct s_char
+{
+	int			height;
+	int			width;
+	int			i;
+	int			player_x;
+	int			player_y;
+	char		**map_copy;
+}				t_char;
 
 typedef struct s_img
 {
@@ -136,8 +191,6 @@ int				close_window(t_complete *game);
 int				exit_point(t_complete *game);
 void			if_walls(t_complete *game);
 void			character_valid(t_complete *game);
-void			check_errors(t_complete *game);
-// int				is_map_line(char *line);
 void			free_strs(char **strs);
 int				count_strs(char **strs);
 int				parse_identifier(t_complete *game, char *line);
@@ -158,7 +211,16 @@ void			raycast(t_complete *game);
 int				rotate_left(t_complete *game);
 int				rotate_right(t_complete *game);
 
-void			draw_minimap(t_complete *game);
+void			draw_minimap(t_complete *game, t_mini min);
 void			draw_minimap_player(t_complete *game);
+int				is_empty_line(const char *line);
+int				map_all_wall(char **map, int height);
+void			draw_abs1(t_minimap *m);
+void			draw_abs2(t_minimap *m);
+void			draw_abs3(t_minimap *m);
+int				get_pixel_color(t_texture *tex, int x, int y);
+t_texture		*get_texture_by_side(t_ray *ray, t_complete *game);
+void			draw_vertical_line(t_ray *ray, t_complete *game, int x);
+void			calc_raydir(t_ray *ray, t_player *player, int x);
 
 #endif
