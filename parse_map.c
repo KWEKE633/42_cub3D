@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:21:14 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/15 10:44:26 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/22 12:58:58 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ static int	add_line(t_complete *game, char *line)
 	game->heightmap++;
 	temporary = (char **)malloc(sizeof(char *) * (game->heightmap + 1));
 	if (!temporary)
-	{
-		ft_printf("Error\nMemory allocation failed\n");
-		return (0);
-	}
+		return (ft_printf("Error\nMemory allocation failed\n"), 0);
 	temporary[game->heightmap] = NULL;
 	while (i < game->heightmap - 1)
 	{
 		temporary[i] = game->map[i];
 		i++;
 	}
-	temporary[i] = line;
+	temporary[i] = ft_strdup(line);
+	if (!temporary[i])
+		return (0);
+	line = NULL;
 	if (game->map)
 		free(game->map);
 	game->map = temporary;
@@ -55,28 +55,28 @@ static int	add_line(t_complete *game, char *line)
 int	map_reading(t_complete *game, char *line)
 {
 	int	i;
-	int j;
+	int	j;
 
 	j = 1;
-	while (1)
+	while (1 && j++ > 0)
 	{
 		if (!add_line(game, line))
 		{
 			free(line);
 			break ;
 		}
+		free(line);
 		line = get_next_line(game->fd);
 		if (!line)
 			break ;
-		j++;
 	}
-	close (game->fd);
-	i = 0;
-	game->widthmap =  (int *)malloc(sizeof(int) * (j + 1));
-	while (game->map[i])
-	{
+	close(game->fd);
+	i = -1;
+	game->widthmap = (int *)malloc(sizeof(int) * (j + 1));
+	while (game->map[++i])
 		game->widthmap[i] = width_of_map(game->map[i]);
-		i++;
-	}
+	if (!game->widthmap)
+		free(game->widthmap);
+	game->widthmap[i] = 0;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:12:26 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/15 15:26:44 by enkwak           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:35:46 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t	i;
-
-	i = 0;
 	if (!s1 || !s2)
 		return (1);
 	while (*s1 == *s2 && *s1 && *s2)
@@ -45,10 +42,12 @@ int	main_sub(t_complete *game)
 {
 	if (!game->mlxpointer)
 	{
-		exit_point(game);
 		ft_printf("Error\nFailed to initialize MLX.\n");
+		exit_point(game);
 		return (1);
 	}
+	if (init_textures(game))
+		exit_point(game);
 	game->winpointer = mlx_new_window(game->mlxpointer, WIDTH, HEIGHT, "cub3D");
 	if (!game->winpointer)
 	{
@@ -57,11 +56,10 @@ int	main_sub(t_complete *game)
 			mlx_destroy_display(game->mlxpointer);
 			free(game->mlxpointer);
 		}
-		exit_point(game);
 		ft_printf("Error\nFailed to create a new window.\n");
+		exit_point(game);
 		return (1);
 	}
-	load_textures(game);
 	render_frame(game);
 	mlx_key_hook(game->winpointer, controls_working, game);
 	mlx_hook(game->winpointer, 17, 0, close_window, game);
@@ -87,9 +85,9 @@ int	main(int argc, char **argv)
 	if (parse_cubfile(&game, argv[1]))
 	{
 		ft_printf("Error\nFailed to read the map.\n");
-		return (1);
+		exit_point(&game);
 	}
-	check_errors(&game);
+	character_valid(&game);
 	game.mlxpointer = mlx_init();
 	return (main_sub(&game));
 }

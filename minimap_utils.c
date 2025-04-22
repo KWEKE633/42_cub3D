@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enkwak <enkwak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 23:57:22 by enkwak            #+#    #+#             */
-/*   Updated: 2025/04/21 08:35:10 by enkwak           ###   ########.fr       */
+/*   Created: 2025/04/22 13:04:27 by enkwak            #+#    #+#             */
+/*   Updated: 2025/04/22 13:05:07 by enkwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3D.h"
 
-char	*ft_strdup(const char *s1)
+void	draw_abs1(t_minimap *m)
 {
-	size_t	size;
-	char	*dest;
-
-	size = ft_strlen(s1);
-	dest = (char *)malloc((size + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	ft_memcpy(dest, s1, size + 1);
-	return (dest);
+	m->dx = abs(m->p2x - m->p1x);
+	m->dy = abs(m->p2y - m->p1y);
+	m->sx = -1;
+	m->sy = -1;
 }
 
-// int main()
-// {
-// 	char str161[] ="radwimps";
-//     printf("zisaku  : %s\n", ft_strdup(str161));
-//     printf("library  : %s\n", strdup(str161));
-// 	return (0);
-// }
+void	draw_abs2(t_minimap *m)
+{
+	m->dx = abs(m->p3x - m->p1x);
+	m->dy = abs(m->p3y - m->p1y);
+	m->sx = -1;
+	m->sy = -1;
+}
+
+void	draw_abs3(t_minimap *m)
+{
+	m->dx = abs(m->p3x - m->p2x);
+	m->dy = abs(m->p3y - m->p2y);
+	m->sx = -1;
+	m->sy = -1;
+}
